@@ -1,0 +1,45 @@
+{% load static %}
+{% load socialaccount %}
+<!doctype html>
+ <html>
+   <head>
+    <meta charset="utf-8">
+    <title>aaaaaa</title>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+   </head>
+
+  <body>
+    <h1>My Google Login Projectlumerrrr</h1>
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }} ! <a href="{% url 'account_logout' %}">Logout</a></p>
+      {% if user.is_staff %}
+        <p>aku staff</p>
+        {% else %}
+        <p>aku bukan staff</p>
+        {% endif %}
+    {% else %}
+   
+    <a href="{% provider_login_url 'google' %}">Login with Google</a>
+    {% endif %}
+    {% for account in user.socialaccount_set.all %}
+
+ {% comment %} show avatar from url {% endcomment %}
+ <h2 style="text-transform:capitalize;">{{ account.provider }} account data</h2>
+
+ <p><img width="50" height="50" src="{{ account.get_avatar_url }}"/></p>
+
+ 
+ <p>Name: {{ account.extra_data.name }}</p>
+
+  
+  <p>Email: {{ account.extra_data.email }}</p>
+  <p>Last Login: {{ user.last_login }}</p>
+  <p>Date Joined: {{ user.date_joined }}</p>
+  <p>Email: {{ user.email }}</p>
+  
+  
+{% endfor %}
+   
+   </body>
+ </html>
