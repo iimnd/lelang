@@ -34,8 +34,8 @@ jobs:
         with:
           context: .
           push: true
-          tags: iimnd/django-demo:${{ github.event.inputs.version }}
+          tags: iimnd/django-lumer:${{ github.event.inputs.version }}
 
       - name: Check file and folder
         run: |
-          docker run --rm iimnd/django-demo:${{ github.event.inputs.version }} sh -c "ls && tail *.txt"
+          docker run --rm iimnd/django-lumer:${{ github.event.inputs.version }} sh -c "ls && tail *.txt"
